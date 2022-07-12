@@ -53,7 +53,7 @@ for(let i =0; i < 50; i++){
 image(rings,x[i], y[i], 20,20)
 }
 
-if(dist(sonicX, sonicY, x[i], y[i])<30){
+if(image, dist(sonicX, sonicY, x[i], y[i])<30){
   x.splice(i, 1)
   y.splice(i, 1)
 }
