@@ -97,12 +97,13 @@ function draw(){
       function homeScreen(){
         background(0)
         fill(250)
-        textSize(20)
-        text("Ring Conqueror", windowWidth/2.5, windowHeight/6)
-        text("Press E for easy difficulty", windowWidth/4, windowHeight/4)
-        text("Press M for easy difficulty", windowWidth/2, windowHeight/4 )
-        text("Press H for hard difficulty", windowWidth/1.5, windowHeight/4)
-        text("Press I for instructions", windowWidth/2.25, windowHeight/1.33)
+        textSize(50)
+        text("Ring Conqueror", windowWidth/2.7, windowHeight/6)
+        textSize(30)
+        text("Press E for easy difficulty", windowWidth/7, windowHeight/3)
+        text("Press M for easy difficulty", windowWidth/2.5, windowHeight/3 )
+        text("Press H for hard difficulty", windowWidth/1.5, windowHeight/3)
+        text("Press I for instructions", windowWidth/2.5, windowHeight/1.5)
 
         if(key === 'e'){
           easyGameBool=true
@@ -166,7 +167,7 @@ function draw(){
               textSize(40)
               text("Collect all rings to win" + score, windowWidth/2.5, 50)
 
-              if(score >= 3){
+              if(score >= 10){
                 easyGameBool = false
                 winScreenBool = true
 
