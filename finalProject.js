@@ -5,10 +5,23 @@ let background2
 let background3
 let rings
 let buzzer
+let eggman
+let motobug
+let sonicrunning
+let sonicdancing
+let reeses
 
-let xSpeed
-let ySpeed
 
+let buzzerxSpeed=5
+let buzzerySpeed=5
+
+let motobugxSpeed=10
+let motobugySpeed=10
+
+let eggmanxSpeed=5
+let eggmanySpeed=5
+
+let customFont
 
 let x = []
 let y = []
@@ -17,15 +30,21 @@ let score =0
 let sonicX
 let sonicY
 
+let buzzerX
+let buzzerY
 
 let xPos;
 let yPos;
+
+
 
 let homeScreenBool = true
 let easyGameBool = false
 let mediumGameBool =false
 let hardGameBool =false
-let winScreenBool=false
+let easywinScreenBool=false
+let mediumwinScreenBool=false
+let hardwinScreenBool=false
 let instructionBool=false
 
 
@@ -39,6 +58,13 @@ function preload(){
   buzzer=loadImage('buzzer.png')
   background2=loadImage('background2.png')
   background3=loadImage('background3.png')
+  motobug=loadImage('motobug.png')
+  eggman=loadImage('eggman.png')
+customFont = loadFont('gamefont.ttf')
+sonicrunning = loadImage('sonicrunning.gif')
+sonicdancing = loadImage('sonicdancing.gif')
+ reeses = loadImage('reeses.png')
+
 }
 
 
@@ -60,7 +86,9 @@ function setup(){
   sonicX = windowWidth/2
   sonicY = windowHeight/2
 
-
+  xPos = random(windowWidth)
+  yPos = random(windowHeight)
+  print(xPos)
 
 }
 
@@ -77,10 +105,16 @@ function draw(){
       if(hardGameBool == true){
         hardGame()}
 
-        if(winScreenBool == true){
-          winScreen()
+        if(easywinScreenBool == true){
+          easywinScreen()
+        }
+        if(mediumwinScreenBool==true){
+          mediumwinScreen()
         }
 
+        if(hardwinScreenBool == true){
+          hardwinScreen()
+        }
 
         if(homeScreenBool==true){
           homeScreen()
@@ -97,10 +131,11 @@ function draw(){
       function homeScreen(){
         background(0)
         fill(250)
+        textFont(customFont)
         textSize(50)
         text("Ring Conqueror", windowWidth/2.7, windowHeight/6)
-        textSize(30)
-        text("Press E for easy difficulty", windowWidth/7, windowHeight/3)
+        textSize(23)
+        text("Press E for easy difficulty", windowWidth/8, windowHeight/3)
         text("Press M for easy difficulty", windowWidth/2.5, windowHeight/3 )
         text("Press H for hard difficulty", windowWidth/1.5, windowHeight/3)
         text("Press I for instructions", windowWidth/2.5, windowHeight/1.5)
@@ -148,10 +183,11 @@ function draw(){
             background(0)
             fill(250)
             textSize(40)
-            text("How To Play", windowWidth/4, windowHeight/12)
-            text("Use the arrow keyes to move the character.", windowWidth/5, windowHeight/2.75)
+            text("How To Play", windowWidth/2.7, windowHeight/12)
+            textSize(30)
+            text("Use the arrow keyes to move the character.", windowWidth/4, windowHeight/3)
             text("Collect all the rings in each level to win.", windowWidth/4, windowHeight/2.25)
-            text("You only have one life, so make sure to avoid enimies or you die.", windowWidth/10, windowHeight/1.8)
+            text("You only have one life, so make sure to avoid enimies or you  will die.", windowWidth/10, windowHeight/1.8)
             text("Have fun!", windowWidth/4, windowHeight/1.5)
             text("Press L to return back to home screen", windowWidth/4, windowHeight/1.33)
             if(key === 'l'){
@@ -165,27 +201,39 @@ function draw(){
               background(background1)
               fill(0)
               textSize(40)
-              text("Collect all rings to win" + score, windowWidth/2.5, 50)
+              text("Collect all rings to win " + score, windowWidth/2.5, 50)
 
-              if(score >= 10){
+              if(score >= 1){
                 easyGameBool = false
-                winScreenBool = true
+                easywinScreenBool = true
 
               }
 
 
               image(buzzer, xPos, yPos, 30, 30)
-              xPos = xPos + xSpeed
-              yPos = yPos + ySpeed
+              xPos = xPos + buzzerxSpeed
+              yPos = yPos + buzzerySpeed
 
-              if(xPos>= windowWidth -15 || xPos <=0) {
-                xSpeed = xSpeed *-1
+              if(xPos>= windowWidth -10 || xPos <=0) {
+                buzzerxSpeed = buzzerxSpeed *-1
               }
 
               if(yPos>= windowHeight || yPos <=0) {
-                ySpeed = ySpeed * -1
+                buzzerySpeed = buzzerySpeed * -1
               }
 
+
+
+              // for(let i =0; i < x.length; i++){
+              //   image(sonic,x[i], y[i], 20,20)
+              //   if(dist(xPos, yPos, x[i], y[i])<30){
+              //     x.splice(i, 1)
+              //     y.splice(i, 1)
+              //     homeScreenBool=true
+              //     easyGameBool=false
+              //     print(x.length)
+              //   }
+              // }
 
 
               for(let i =0; i < x.length; i++){
@@ -195,6 +243,8 @@ function draw(){
                   y.splice(i, 1)
                   score++
                   print(x.length)
+
+
                 }
               }
 
@@ -254,14 +304,29 @@ function draw(){
               textSize(40)
               text("Collect all rings to win" + score, windowWidth/2.5, 50)
 
-              if(score >= 3){
+
+
+              if(score >= 1){
                 mediumGameBool = false
-                winScreenBool = true
+                mediumwinScreenBool = true
 
               }
 
 
-              for(let i =0; i < 10; i++){
+              image(motobug, xPos, yPos, 30, 30)
+              xPos = xPos + motobugxSpeed
+              yPos = yPos + motobugySpeed
+
+              if(xPos>= windowWidth -10 || xPos <=0) {
+                motobugxSpeed = motobugxSpeed *-1
+              }
+
+              if(yPos>= windowHeight || yPos <=0) {
+                motobugySpeed = motobugySpeed * -1
+              }
+
+
+              for(let i =0; i < x.length; i++){
                 image(rings,x[i], y[i], 20,20)
                 if(dist(sonicX, sonicY, x[i], y[i])<30){
                   x.splice(i, 1)
@@ -322,12 +387,24 @@ function draw(){
 
               if(score >= 3){
                 hardGameBool = false
-                winScreenBool = true
+                hardwinScreenBool = true
 
               }
 
+              image(eggman, xPos, yPos, 30, 30)
+              xPos = xPos + eggmanxSpeed
+              yPos = yPos + eggmanySpeed
 
-              for(let i =0; i < 10; i++){
+              if(xPos>= windowWidth -10 || xPos <=0) {
+                eggmanxSpeed = eggmanxSpeed *-1
+              }
+
+              if(yPos>= windowHeight || yPos <=0) {
+                eggmanySpeed = eggmanySpeed * -1
+              }
+
+
+              for(let i =0; i <x.length; i++){
                 image(rings,x[i], y[i], 20,20)
                 if(dist(sonicX, sonicY, x[i], y[i])<30){
                   x.splice(i, 1)
@@ -380,16 +457,18 @@ function draw(){
             }
 
 
-            function winScreen(){
+            function easywinScreen(){
 
-              background(200, 30, 100)
+              background(0)
               fill(225)
-              textSize(20)
-              text("You Won!! Now go beat the next level. press Q to quit.", windowWidth/2.5, 50)
+              textSize(35)
+              text("Good job, but that was too easy. Now go beat the next level.", windowWidth/8, windowHeight/6)
+              text("Press Q to quit", windowWidth/8, windowHeight/4)
+              loadImage(sonicrunning, windowWidth/8, windowHeight/5)
               if(key === 'q'){
                 score=0
                 homeScreenBool=true
-                winScreenBool=false}
+                easywinScreenBool=false}
 
 
 
@@ -398,6 +477,51 @@ function draw(){
 
               }
 
+
+              function mediumwinScreen(){
+
+                background(0)
+                fill(225)
+                textSize(35)
+                text("Nice! It seems like you're ready for the hardest level.", windowWidth/8, windowHeight/6)
+                text("Do you have what it takes?", windowWidth/8, windowHeight/4.5)
+                text("Press Q to quit.", windowWidth/8, windowHeight/3.5)
+                loadImage(sonicrunning, windowWidth/8, windowHeight/2)
+                if(key === 'q'){
+                  score=0
+                  homeScreenBool=true
+                  mediumwinScreenBool=false}
+
+
+
+
+
+
+                }
+
+
+                function hardwinScreen(){
+
+                  background(0)
+                  fill(225)
+                  textSize(35)
+                  text("Congradulations! You have collected all the rings.", windowWidth/8, windowHeight/6)
+                  text("You are now an official ring conqueror.", windowWidth/8, windowHeight/4.5)
+                  text("Here, take this for your good work.", windowWidth/8, windowHeight/3.5)
+                  loadImage(reeses, windowWidth/8, windowHeight/2)
+                  text("Press Q to quit.", windowWidth/8, windowHeight/1)
+
+                  if(key === 'q'){
+                    score=0
+                    homeScreenBool=true
+                    hardwinScreenBool=false}
+
+
+
+
+
+
+                  }
 
 
 
